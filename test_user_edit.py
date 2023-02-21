@@ -89,7 +89,7 @@ class TestUserEdit(BaseCase):
         first_name = register_data['firstName']
         password = register_data['password']
         user_id = self.get_json_value(response1, "id")
-        print(user_id)
+        #print(user_id)
 
         # LOGIN
         login_data = {
@@ -109,9 +109,9 @@ class TestUserEdit(BaseCase):
             cookies={"auth_sid": auth_sid},
             data={"firstName": new_name}
         )
-        print(response3.status_code)
-        print(response3.content)
-        #Assertions.assert_code_status(response3, 200)
+        #print(response3.status_code)
+        #print(response3.content)
+        Assertions.assert_code_status(response3, 422)
 
         # GET
         response4 = MyRequests.get(
