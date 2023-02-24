@@ -1,9 +1,14 @@
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
+import allure
+from allure import severity, severity_level
 
+@allure.epic("Delete user cases")
 class TestUserDelete(BaseCase):
     #Попытка удалить пользователя по ID 2
+    @severity(severity_level.CRITICAL)
+    @allure.description("This test trying to delete user with ID = 2")
     def test_delete_user_as_same_user(self):
         data = {
             'email': 'vinkotov@example.com',
@@ -29,6 +34,8 @@ class TestUserDelete(BaseCase):
 
     # Второй - позитивный. Создать пользователя, авторизоваться из-под него, удалить,
     # затем попробовать получить его данные по ID и убедиться, что пользователь действительно удален.
+    @severity(severity_level.CRITICAL)
+    @allure.description("This test successfully delete just created user")
     def test_positive_delete_just_created_user_with_authorization_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -73,6 +80,8 @@ class TestUserDelete(BaseCase):
 
 
     # Третий - негативный, попробовать удалить пользователя, будучи авторизованными другим пользователем.
+    @severity(severity_level.CRITICAL)
+    @allure.description("This test negative delete the user, while being logged in by another user")
     def test_negative_delete_just_created_user_with_authorization_other_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
